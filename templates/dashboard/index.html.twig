@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+    <div class="form-container">
+        <div class="card">
+            <div class="card-header">
+                Dashboard
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Email - {{ user.email }}</h5>
+                <p class="card-text">Phone Number - +{{ user.countryCode }} {{ user.phoneNumber }}</p>
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
