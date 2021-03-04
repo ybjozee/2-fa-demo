@@ -22,7 +22,7 @@ Installation
 this command:
 
 ```bash
-$ git clone https://github.com/ybjozee/2-fa-demo 2-fa-demo
+$ git clone https://github.com/ybjozee/2-fa-demo.git 2-fa-demo
 $ cd 2-fa-demo
 $ composer install
 ```
