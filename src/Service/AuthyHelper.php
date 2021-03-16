@@ -2,7 +2,8 @@
 
 namespace App\Service;
 
-use App\Exception\RegistrationException;
+use Authy\AuthyFormatException;
+use App\Exception\{RegistrationException, VerificationException};
 use Authy\AuthyApi;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -49,10 +50,21 @@ class AuthyHelper {
     )
     : void {
 
-        $verification = $this->api->verifyToken($userAuthyId, $token);
-        if (!$verification->ok()) {
-            throw new \App\Exception\VerificationException("Invalid OTP provided");
+        try {
+            $verification = $this->api->verifyToken($userAuthyId, $token);
+            if (!$verification->ok()) {
+                $this->throwVerificationException();
+            }
         }
+        catch (AuthyFormatException $exception) {
+            $this->throwVerificationException();
+        }
+    }
+
+    private function throwVerificationException()
+    : void {
+
+        throw new VerificationException("Invalid OTP provided");
     }
 
 }
